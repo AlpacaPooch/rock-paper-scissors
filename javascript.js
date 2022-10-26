@@ -17,7 +17,7 @@ function getComputerChoice () {
 //compare each rps
 // print
 
-let userChoice = 'var'
+let userChoice = 'var';
 function capitialize () {
     userChoice = userChoice.toLowerCase();
     let start = userChoice.slice(0, 1);
@@ -31,53 +31,74 @@ let playerPTS = 0;
 let compPTS = 0;
 function game () {
     compchoice = getComputerChoice();
-    console.log(compchoice)
+    computerChoice.textContent = ` Computer chose ${compchoice}!`
 
     if (capitialize() == compchoice) {
-        console.log('tie');
+        winner.textContent = 'tie';
     }
     else if (capitialize() == 'Rock' && compchoice == 'Paper') {
-        console.log(`You lose, ${compchoice} beats ${capitialize()}.`)
+        winner.textContent = `You lose, ${compchoice} beats ${capitialize()}.`;
         compPTS++;
     }
     else if (capitialize() == 'Scissors' && compchoice == 'Rock') {
-        console.log(`You lose, ${compchoice} beats ${capitialize()}.`);
+        winner.textContent = `You lose, ${compchoice} beats ${capitialize()}.`;
         compPTS++;
     }
     else if (capitialize() == 'Paper' && compchoice == 'Scissors') {
-        console.log(`You lose, ${compchoice} beats ${capitialize()}.`);
+        winner.textContent = `You lose, ${compchoice} beats ${capitialize()}.`;
         compPTS++
     }
     else if (capitialize() == 'Paper' && compchoice == 'Rock') {
-        console.log(`You win, ${capitialize()} beats ${compchoice}.`);
+        winner.textContent = `You win, ${capitialize()} beats ${compchoice}.`;
         playerPTS++;
     }
     else if (capitialize() == 'Scissors' && compchoice == 'Paper') {
-        console.log(`You win, ${capitialize()} beats ${compchoice}.`);
+        winner.textContent = `You win, ${capitialize()} beats ${compchoice}.`;
         playerPTS++;
     }
     else if (capitialize() == 'Rock' && compchoice == 'Scissors') {
-        console.log(`You win, ${capitialize()} beats ${compchoice}.`);
+        winner.textContent = `You win, ${capitialize()} beats ${compchoice}.`;
         playerPTS++;
     }
+    player.textContent = `Player Points: ${playerPTS}`;
+    computer.textContent = `Computer Points: ${compPTS}`;
 }
-
 let playagain = 'dog';
 function play () {
     let played = false;
-    for (let i = 1; i <= 5; i++) {
-        userChoice = prompt('Enter Rock Paper or Sissors');
         getComputerChoice();
         game();
-    }
     if (playerPTS > compPTS){
-        console.log(`Player wins with ${playerPTS} vs ${compPTS}.`);
+        winner.textContent = `Player wins with ${playerPTS} vs ${compPTS}.`;
 }
     else if (compPTS > playerPTS){
-        console.log(`Player loses with ${playerPTS} vs ${compPTS}.`);
+        winner.textContent = `Player loses with ${playerPTS} vs ${compPTS}.`;
     }
-    else console.log('tie game.')
+    else winner.textContent = 'tie game.'
 }
-play();
 
 
+const player = document.querySelector('.playerPoints');
+const computer = document.querySelector('.computerPoints');
+const winner = document.querySelector('.winner');
+const computerChoice = document.querySelector('.computerChoice');
+
+//player.forEach((points) => {
+ //   points.textContent(playerPTS);
+//})
+
+
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+button.addEventListener('click', (e) => {
+    userChoice = e.target.getAttribute('class');
+    
+    capitialize();
+    getComputerChoice();
+    game();
+    
+
+    
+});
+});
